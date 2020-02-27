@@ -33,4 +33,18 @@ public class CartService {
         System.out.println("Total price: " + total);
     }
 
+    public void addVat(double vatRate) {
+        List<Product> products = cart.getProducts();
+        for (Product product : products) {
+            product.setPrice(Math.round(product.getPrice() * (1 + vatRate) * 100) / 100d);
+        }
+    }
+
+    public void addDiscount(double discountRate) {
+        List<Product> products = cart.getProducts();
+        for (Product product : products) {
+            product.setPrice(Math.round(product.getPrice() * (1 - discountRate) * 100) / 100d);
+        }
+    }
+
 }
